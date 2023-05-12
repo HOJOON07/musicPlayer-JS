@@ -43,7 +43,6 @@
 
     requestAnimationFrame(update);
   }
-
   function wave(colour, lambda, nodes) {
     this.colour = colour;
     this.lambda = lambda;
@@ -53,9 +52,7 @@
     for (var i = 0; i <= nodes + 2; i++) {
       var temp = [((i - 1) * cvs.width) / nodes, 0, Math.random() * 200, 0.3];
       this.nodes.push(temp);
-      // console.log(temp);
     }
-    // console.log(this.nodes);
   }
 
   function bounce(nodeArr) {

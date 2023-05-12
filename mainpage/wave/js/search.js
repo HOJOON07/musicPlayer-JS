@@ -11,12 +11,6 @@ const mainFooter = document.querySelector(".footer");
 const cardWrap2 = document.querySelector(".cardWrap");
 const url = "https://www.youtube.com/results?search_query=";
 
-//모달 Dom 선택
-const cardmodal = document.querySelector(".cardmodal");
-function Modalon() {
-  cardmodal.style.display = "flex";
-}
-
 //기본 1~5위 까지 실시간 순위 만들어주는 함수
 for (let i = 0; i < rank.length; i++) {
   rank[i].setAttribute("id", data[i].id);
@@ -29,10 +23,15 @@ for (let i = 0; i < rank.length; i++) {
 // 검색창 1~ 5위 순위에 있는 것들 addEventListener 모달창 띄우기
 //!!!!!
 
+//모달 Dom 선택
+const cardmodal = document.querySelector(".cardmodal");
+function Modalon() {
+  cardmodal.style.display = "flex";
+}
+
 for (let i = 0; i < rank.length; i++) {
   rank[i].addEventListener("click", function () {
-    cardmodal.style.display = "flex"; //이거 맨마지막에
-    //id값을 가져오고 filter로 데이터에서 추출해서 그거에 맞게 create 해주면 되겠다.
+    cardmodal.style.display = "flex";
     const idNum = rank[i].id;
     const targetData = data.filter((el) => el.id == idNum);
     //1 젤 큰 div
@@ -53,7 +52,7 @@ for (let i = 0; i < rank.length; i++) {
     const albumImg = document.createElement("img");
     albumImg.classList.add("albumImg");
     albumImg.setAttribute("src", targetData[0].albumCover);
-    //6 아이콘 div 폰트 어썸 아이콘은 visiblity로 클래스 줬다 뺐다 하면서 처리하자
+    //6 아이콘 div 폰트 어썸 아이콘은 visiblity 클래스 처리
     const iconBack = document.createElement("div");
     iconBack.setAttribute(
       "onClick",
@@ -88,7 +87,6 @@ for (let i = 0; i < rank.length; i++) {
     const heartIcon = document.createElement("div");
     heartIcon.classList.add("heartIcon");
 
-
     heartIcon.addEventListener("click", function () {
       if (heartIcon.classList.contains("red")) {
         heartIcon.classList.remove("red");
@@ -96,7 +94,6 @@ for (let i = 0; i < rank.length; i++) {
         heartIcon.classList.add("red");
       }
     });
-
 
     cardmodal.append(cardWrap);
     cardWrap.append(rankNum);
@@ -454,7 +451,6 @@ mainFooter?.addEventListener("click", function () {
 });
 
 //모달창 이외에 부분을 클릭하면 모달창 사라지게 함
-
 cardmodal.addEventListener("click", (e) => {
   const evTarget = e.target;
   if (evTarget.classList.contains("cardmodal")) {
@@ -462,7 +458,6 @@ cardmodal.addEventListener("click", (e) => {
     cardmodal.innerHTML = "";
   }
 });
-
 //esc 키 누르면 모달 창 없어짐
 window.addEventListener("keyup", (e) => {
   if (cardmodal.style.display === "flex" && e.key === "Escape") {
